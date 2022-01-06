@@ -1,13 +1,14 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://imports/background.png" type="Texture" id=2]
+[ext_resource path="res://scene/tree1.tscn" type="PackedScene" id=3]
 
 [node name="World" type="Node2D"]
 
 [node name="background" type="Sprite" parent="."]
-position = Vector2( 435.585, 208.542 )
-scale = Vector2( 2.06747, 2.2193 )
+position = Vector2( -2348.73, 1954.03 )
+scale = Vector2( 4.78087, 5.62018 )
 texture = ExtResource( 2 )
 
 [node name="YSort" type="YSort" parent="."]
@@ -16,3 +17,9 @@ texture = ExtResource( 2 )
 
 [node name="Camera2D" type="Camera2D" parent="YSort/Player"]
 current = true
+
+[node name="tree1" parent="YSort" instance=ExtResource( 3 )]
+position = Vector2( 281.817, 117.6 )
+
+[node name="tree2" parent="YSort" instance=ExtResource( 3 )]
+position = Vector2( 484.175, 281.817 )

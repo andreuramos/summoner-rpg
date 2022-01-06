@@ -21,7 +21,6 @@ func _process(delta):
 		animationState.travel("walk")
 		velocity = velocity.move_toward(input_vector * MAX_SPEED, ACCELERATION * delta)
 	else:
-		print(animationTree.get("parameters/idle/blend_position"))
 		animationState.travel("idle")
 		velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
 	
