@@ -352,22 +352,22 @@ graph_offset = Vector2( 13, 54 )
 resource_local_to_scene = false
 
 [node name="Player" type="KinematicBody2D"]
-position = Vector2( 193.862, 106.799 )
+position = Vector2( 1.29672, 0.425606 )
 script = ExtResource( 1 )
 
 [node name="shadow" type="Sprite" parent="."]
-position = Vector2( -1.59286, -16.6864 )
+position = Vector2( 0.0889282, -18.3682 )
 scale = Vector2( 0.681932, 0.681932 )
 texture = ExtResource( 3 )
 
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( -1.4158, -30.204 )
+position = Vector2( -0.15448, -31.8858 )
 texture = ExtResource( 2 )
 hframes = 52
 frame = 37
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( -2.40793, -3.90161 )
+position = Vector2( -1.98749, 0.302872 )
 rotation = 1.5708
 shape = SubResource( 1 )
 
