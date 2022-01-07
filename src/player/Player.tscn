@@ -1,12 +1,132 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=38 format=2]
 
 [ext_resource path="res://player/Player.gd" type="Script" id=1]
-[ext_resource path="res://imports/player-walk.png" type="Texture" id=2]
+[ext_resource path="res://player/player-sprite.png" type="Texture" id=2]
 [ext_resource path="res://imports/shadow-m.png" type="Texture" id=3]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 9.94711
 height = 13.1369
+
+[sub_resource type="Animation" id=24]
+resource_name = "hit-down"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 43, 44, 45, 46, 42 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.5 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "finish_attack_animation"
+} ]
+}
+
+[sub_resource type="Animation" id=33]
+resource_name = "hit-left"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 38, 39, 40, 41, 37 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.5 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "finish_attack_animation"
+} ]
+}
+
+[sub_resource type="Animation" id=34]
+resource_name = "hit-right"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 33, 34, 35, 36, 32 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.5 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "finish_attack_animation"
+} ]
+}
+
+[sub_resource type="Animation" id=35]
+resource_name = "hit-up"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 48, 49, 50, 51, 47 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.5 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "finish_attack_animation"
+} ]
+}
 
 [sub_resource type="Animation" id=2]
 resource_name = "idle-down"
@@ -140,6 +260,29 @@ tracks/0/keys = {
 "values": [ 24, 25, 26, 27, 28, 29, 30, 31 ]
 }
 
+[sub_resource type="AnimationNodeAnimation" id=36]
+animation = "hit-up"
+
+[sub_resource type="AnimationNodeAnimation" id=37]
+animation = "hit-left"
+
+[sub_resource type="AnimationNodeAnimation" id=38]
+animation = "hit-down"
+
+[sub_resource type="AnimationNodeAnimation" id=39]
+animation = "hit-right"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id=30]
+blend_point_0/node = SubResource( 36 )
+blend_point_0/pos = Vector2( 0, -1 )
+blend_point_1/node = SubResource( 37 )
+blend_point_1/pos = Vector2( -1, 0 )
+blend_point_2/node = SubResource( 38 )
+blend_point_2/pos = Vector2( 0, 1 )
+blend_point_3/node = SubResource( 39 )
+blend_point_3/pos = Vector2( 1, 0 )
+blend_mode = 1
+
 [sub_resource type="AnimationNodeAnimation" id=10]
 animation = "idle-left"
 
@@ -190,13 +333,20 @@ blend_mode = 1
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=21]
 
+[sub_resource type="AnimationNodeStateMachineTransition" id=31]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=32]
+
 [sub_resource type="AnimationNodeStateMachine" id=22]
+states/hit/node = SubResource( 30 )
+states/hit/position = Vector2( 548, 199 )
 states/idle/node = SubResource( 14 )
 states/idle/position = Vector2( 548, 105 )
 states/walk/node = SubResource( 19 )
 states/walk/position = Vector2( 731, 105 )
-transitions = [ "idle", "walk", SubResource( 20 ), "walk", "idle", SubResource( 21 ) ]
+transitions = [ "idle", "walk", SubResource( 20 ), "walk", "idle", SubResource( 21 ), "idle", "hit", SubResource( 31 ), "hit", "idle", SubResource( 32 ) ]
 start_node = "idle"
+graph_offset = Vector2( 13, 54 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=23]
 resource_local_to_scene = false
@@ -213,8 +363,8 @@ texture = ExtResource( 3 )
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( -1.4158, -30.204 )
 texture = ExtResource( 2 )
-hframes = 32
-frame = 16
+hframes = 52
+frame = 37
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( -2.40793, -3.90161 )
@@ -222,6 +372,10 @@ rotation = 1.5708
 shape = SubResource( 1 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/hit-down = SubResource( 24 )
+anims/hit-left = SubResource( 33 )
+anims/hit-right = SubResource( 34 )
+anims/hit-up = SubResource( 35 )
 anims/idle-down = SubResource( 2 )
 anims/idle-left = SubResource( 3 )
 anims/idle-right = SubResource( 4 )
@@ -234,7 +388,7 @@ anims/walk-up = SubResource( 9 )
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource( 22 )
 anim_player = NodePath("../AnimationPlayer")
-active = true
 parameters/playback = SubResource( 23 )
+parameters/hit/blend_position = Vector2( 0.0272232, 0.445087 )
 parameters/idle/blend_position = Vector2( 0, 0 )
 parameters/walk/blend_position = Vector2( 0, 0 )
