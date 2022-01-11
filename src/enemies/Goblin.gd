@@ -14,3 +14,7 @@ func _process(delta):
 func move(delta):
 	pass
 
+
+
+func _on_hurtbox_area_entered(area):
+	queue_free()
