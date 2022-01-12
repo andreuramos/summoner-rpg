@@ -20,6 +20,7 @@ height = 9.81236
 radius = 17.0098
 
 [node name="goblin" type="KinematicBody2D"]
+collision_mask = 3
 script = ExtResource( 3 )
 
 [node name="shadow" type="Sprite" parent="."]
@@ -38,6 +39,7 @@ rotation = -1.5708
 shape = SubResource( 2 )
 
 [node name="hurtbox" parent="." instance=ExtResource( 4 )]
+collision_layer = 8
 
 [node name="CollisionShape2D" parent="hurtbox" index="0"]
 position = Vector2( -0.235962, -19.5854 )

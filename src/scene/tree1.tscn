@@ -7,6 +7,7 @@
 height = 26.1455
 
 [node name="tree1" type="StaticBody2D"]
+collision_mask = 0
 
 [node name="shadow" type="Sprite" parent="."]
 position = Vector2( -0.66742, -29.3371 )
