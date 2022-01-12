@@ -46,9 +46,6 @@ func move_state(delta):
 func attack_state(delta):
 	animationState.travel("hit")
 	
-	print("hit: ", animationState.get("parameters/hit/blend_position"))
-	print("move: ", animationState.get("parameters/walk/blend_position"))
-	
 func finish_attack_animation():
 	state = MOVE
 	
