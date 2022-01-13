@@ -39,7 +39,8 @@ func _on_hurtbox_area_entered(area):
 
 
 func _on_sight_radius_body_entered(body):
-	print("found you bitch")
+	if body.name == "Player": # or an ally
+		print("found you bitch at ", body.position.x, " ", body.position.y)
 
 
 func _on_AnimatedSprite_animation_finished():
