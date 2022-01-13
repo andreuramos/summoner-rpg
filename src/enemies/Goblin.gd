@@ -44,5 +44,5 @@ func _on_sight_radius_body_entered(body):
 
 
 func _on_AnimatedSprite_animation_finished():
-	if (animatedSprite.animation == 'die-D'):
+	if animatedSprite.animation.begins_with('die'):
 		finish_dying()
