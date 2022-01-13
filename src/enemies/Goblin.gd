@@ -8,6 +8,7 @@ onready var animatedSprite = $AnimatedSprite
 onready var sightRadius = $sight_radius
 onready var hurtbox = $hurtbox
 onready var shadow = $shadow
+onready var collision = $CollisionShape2D
 
 func _ready():
 	state = IDLE
@@ -31,6 +32,7 @@ func finish_dying():
 	sightRadius.queue_free()
 	hurtbox.queue_free()
 	shadow.queue_free()
+	collision.queue_free()
 
 func _on_hurtbox_area_entered(area):
 	state = DIE
