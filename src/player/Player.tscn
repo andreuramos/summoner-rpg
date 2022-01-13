@@ -1,9 +1,10 @@
-[gd_scene load_steps=40 format=2]
+[gd_scene load_steps=41 format=2]
 
 [ext_resource path="res://player/Player.gd" type="Script" id=1]
 [ext_resource path="res://player/player-sprite.png" type="Texture" id=2]
 [ext_resource path="res://imports/shadow-m.png" type="Texture" id=3]
 [ext_resource path="res://shared/hitbox.tscn" type="PackedScene" id=4]
+[ext_resource path="res://shared/stats.tscn" type="PackedScene" id=5]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 9.94711
@@ -500,5 +501,9 @@ collision_mask = 8
 position = Vector2( -25, -1.75 )
 shape = SubResource( 35 )
 disabled = true
+
+[node name="stats" parent="." instance=ExtResource( 5 )]
+STR = 7
+DEX = 7
 
 [editable path="Position2D/hitbox"]

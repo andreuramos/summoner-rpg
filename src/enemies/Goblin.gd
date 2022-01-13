@@ -9,9 +9,11 @@ onready var sightRadius = $sight_radius
 onready var hurtbox = $hurtbox
 onready var shadow = $shadow
 onready var collision = $CollisionShape2D
+onready var stats = $stats
 
 func _ready():
 	state = IDLE
+
 
 func _process(delta):
 	match state:
@@ -22,11 +24,14 @@ func _process(delta):
 		DIE:
 			start_dying()
 
+
 func move():
 	pass
 
+
 func start_dying():
 	animatedSprite.play("die-D")
+
 
 func finish_dying():
 	sightRadius.queue_free()
@@ -34,8 +39,21 @@ func finish_dying():
 	shadow.queue_free()
 	collision.queue_free()
 
+
 func _on_hurtbox_area_entered(area):
-	state = DIE
+	var attacker = area.find_parent("Player")
+	if attacker == null:
+		return
+		
+	if attacker.has_node("stats"):
+		var attacker_stats = attacker.get_node("stats")
+		if attacker_stats.hit(stats):
+			stats.health -= attacker_stats.damage(stats)
+			print(self.name, "/", stats.health, "/", stats.max_health)
+		else:
+			print("MISS")
+		if stats.health <= 0:
+			state = DIE
 
 
 func _on_sight_radius_body_entered(body):
