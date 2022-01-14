@@ -1,9 +1,11 @@
 extends KinematicBody2D
 
-enum {IDLE, MOVE, ATTACK, DIE}
+enum {IDLE, ATTACK, FOLLOW, DIE}
 var state = IDLE
 var direction = Vector2.ZERO
+var sprite_orientation = "D"
 var floating_text = preload("res://ui/floating_text.tscn")
+var followed_enemy = null
 
 onready var animatedSprite = $AnimatedSprite
 onready var sightRadius = $sight_radius
@@ -19,15 +21,13 @@ func _ready():
 func _process(delta):
 	match state:
 		IDLE:
-			animatedSprite.play("idle-D")
-		MOVE:
-			move()
+			animatedSprite.play("idle-" + sprite_orientation)
+			if (sightRadius.canSeePlayer()):
+				state = FOLLOW
 		DIE:
 			start_dying()
-
-
-func move():
-	pass
+		FOLLOW:
+			follow(delta)
 
 
 func start_dying():
@@ -39,6 +39,16 @@ func finish_dying():
 	hurtbox.queue_free()
 	shadow.queue_free()
 	collision.queue_free()
+
+
+func follow(delta):
+	var enemy_direction = (followed_enemy.global_position - global_position).normalized()
+	direction = direction.move_toward(
+		enemy_direction * stats.MAX_SPEED, 
+		delta * stats.ACCELERATION
+	)
+	print(self.name, direction, enemy_direction, stats.speed())
+	direction = move_and_slide(direction)
 
 
 func _on_hurtbox_area_entered(area):
@@ -65,7 +75,16 @@ func _on_hurtbox_area_entered(area):
 
 func _on_sight_radius_body_entered(body):
 	if body.name == "Player": # or an ally
-		print("found you bitch at ", body.position.x, " ", body.position.y)
+		if body.global_position.y > self.global_position.y:
+			sprite_orientation = "U"
+		else:
+			sprite_orientation = "D"
+		if body.global_position.x > self.global_position.x:
+			sprite_orientation = "R"
+		else:
+			sprite_orientation = "L"
+		followed_enemy = body
+		state = FOLLOW
 
 
 func _on_AnimatedSprite_animation_finished():
