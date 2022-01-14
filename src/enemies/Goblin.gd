@@ -3,6 +3,7 @@ extends KinematicBody2D
 enum {IDLE, MOVE, ATTACK, DIE}
 var state = IDLE
 var direction = Vector2.ZERO
+var floating_text = preload("res://ui/floating_text.tscn")
 
 onready var animatedSprite = $AnimatedSprite
 onready var sightRadius = $sight_radius
@@ -46,12 +47,18 @@ func _on_hurtbox_area_entered(area):
 		return
 		
 	if attacker.has_node("stats"):
+		var text = floating_text.instance()
+		text.position.y -= 50
 		var attacker_stats = attacker.get_node("stats")
 		if attacker_stats.hit(stats):
-			stats.health -= attacker_stats.damage(stats)
+			var damage = attacker_stats.damage(stats)
+			stats.health -= damage
+			text.content = damage
 			print(self.name, "/", stats.health, "/", stats.max_health)
 		else:
-			print("MISS")
+			text.content = "MISS"
+		add_child(text)
+		print(self.global_position, text.global_position)
 		if stats.health <= 0:
 			state = DIE
 
