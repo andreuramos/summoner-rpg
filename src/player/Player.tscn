@@ -505,5 +505,7 @@ disabled = true
 [node name="stats" parent="." instance=ExtResource( 5 )]
 STR = 7
 DEX = 7
+MAX_SPEED = 400
+ACCELERATION = 800
 
 [editable path="Position2D/hitbox"]

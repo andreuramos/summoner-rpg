@@ -3,6 +3,8 @@ extends Node
 export(int) var CON = 6
 export(int) var STR = 5
 export(int) var DEX = 5
+export(int) var MAX_SPEED
+export(int) var ACCELERATION
 
 onready var max_health = CON + roll(1,6)
 onready var health = max_health
