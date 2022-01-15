@@ -49,6 +49,8 @@ func follow(delta):
 	)
 	_update_sprite_orientation(chase_direction)
 	animatedSprite.play("idle-" + sprite_orientation) # todo: walk animation
+	if !sightRadius.canSeePlayer():
+		state = IDLE
 	direction = move_and_slide(direction)
 
 
@@ -79,11 +81,9 @@ func _on_hurtbox_area_entered(area):
 			var damage = attacker_stats.damage(stats)
 			stats.health -= damage
 			text.content = damage
-			print(self.name, "/", stats.health, "/", stats.max_health)
 		else:
 			text.content = "MISS"
 		add_child(text)
-		print(self.global_position, text.global_position)
 		if stats.health <= 0:
 			state = DIE
 
