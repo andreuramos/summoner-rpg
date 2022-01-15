@@ -42,14 +42,29 @@ func finish_dying():
 
 
 func follow(delta):
-	var enemy_direction = (followed_enemy.global_position - global_position).normalized()
+	var chase_direction = (followed_enemy.global_position - global_position).normalized()
 	direction = direction.move_toward(
-		enemy_direction * stats.MAX_SPEED, 
+		chase_direction * stats.MAX_SPEED, 
 		delta * stats.ACCELERATION
 	)
-	print(self.name, direction, enemy_direction, stats.speed())
+	_update_sprite_orientation(chase_direction)
+	animatedSprite.play("idle-" + sprite_orientation) # todo: walk animation
 	direction = move_and_slide(direction)
 
+
+func _update_sprite_orientation(enemy_direction):
+	var degrees = rad2deg(enemy_direction.angle())
+	if -135 <= degrees and degrees < -45:
+		sprite_orientation = "U"
+	elif -45 <= degrees and degrees < 45: 
+		sprite_orientation = "R"
+	elif 45 <= degrees and degrees < 135:
+		sprite_orientation = "D"
+	else:
+		sprite_orientation = "L"
+
+
+# SIGNALS #
 
 func _on_hurtbox_area_entered(area):
 	var attacker = area.find_parent("Player")
